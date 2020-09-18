@@ -2,14 +2,11 @@ import cv2
 import numpy as np
 import time
 
-ROJO_LIMITE_BAJO = np.array([100, 40, 40])
-ROJO_LIMITE_ALTO = np.array([100, 255, 255])
+ROJO_LIMITE_BAJO = np.array([0, 0, 0])
+ROJO_LIMITE_ALTO = np.array([15, 255, 255])
 
 VERDE_LIMITE_BAJO = np.array([74, 0, 0])
 VERDE_LIMITE_ALTO = np.array([120, 255, 255])
-
-AZUL_LIMITE_BAJO = np.array([100, 40, 40])
-AZUL_LIMITE_ALTO = np.array([100, 255, 255])
 
 MORADO_LIMITE_BAJO = np.array([125, 0, 0])
 MORADO_LIMITE_ALTO = np.array([180, 255, 255])
@@ -39,10 +36,8 @@ def  harryPotter(rutaVideo="", rutaAudio=""):
         if videoSinTerminar:
             fotograma = np.flip(fotograma, axis=1)
             cpy = cv2.cvtColor(fotograma, cv2.COLOR_BGR2HSV)
-
-            lower_red = np.array([0, 0, 0])        
-            upper_red = np.array([0, 255, 255]) 
-            mask1 = cv2.inRange(cpy, lower_red, upper_red) 
+            
+            mask1 = cv2.inRange(cpy, ROJO_LIMITE_BAJO, ROJO_LIMITE_ALTO) 
 
             # setting the lower and upper range for mask2  
             mask2 = cv2.inRange(cpy, MORADO_LIMITE_BAJO, MORADO_LIMITE_ALTO) 
